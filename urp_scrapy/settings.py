@@ -71,7 +71,7 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'classschedule',
+        'NAME': 'urp_database',
         'USER': 'root',
         'PASSWORD': '123456789',
         'HOST': 'localhost',

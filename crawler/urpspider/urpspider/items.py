@@ -6,8 +6,11 @@
 # https://doc.scrapy.org/en/latest/topics/items.html
 
 from scrapy_djangoitem import DjangoItem
-from warehouse.models import urpScrapy
+from warehouse.models import urpScrapy,user
 
 
-class PropertiesItem(DjangoItem):
+class classScheduleItem(DjangoItem):
     django_model = urpScrapy
+
+class userItem(DjangoItem):
+    django_model=user
