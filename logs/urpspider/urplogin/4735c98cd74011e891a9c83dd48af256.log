@@ -1,0 +1,37 @@
+2018-10-24 11:52:58 [scrapy.utils.log] INFO: Scrapy 1.5.1 started (bot: urpspider)
+2018-10-24 11:52:58 [scrapy.utils.log] INFO: Versions: lxml 4.2.1.0, libxml2 2.9.5, cssselect 1.0.3, parsel 1.5.0, w3lib 1.19.0, Twisted 18.7.0, Python 3.6.2 (v3.6.2:5fd33b5, Jul  8 2017, 04:57:36) [MSC v.1900 64 bit (AMD64)], pyOpenSSL 18.0.0 (OpenSSL 1.1.0i  14 Aug 2018), cryptography 2.3.1, Platform Windows-10-10.0.16299-SP0
+2018-10-24 11:52:58 [scrapy.crawler] INFO: Overridden settings: {'BOT_NAME': 'urpspider', 'CONCURRENT_REQUESTS_PER_IP': 1, 'DOWNLOAD_DELAY': 3, 'DOWNLOAD_TIMEOUT': 100, 'FEED_EXPORT_ENCODING': 'gb18030', 'LOG_FILE': 'logs\\urpspider\\urplogin\\4735c98cd74011e891a9c83dd48af256.log', 'NEWSPIDER_MODULE': 'urpspider.spiders', 'ROBOTSTXT_OBEY': True, 'SPIDER_MODULES': ['urpspider.spiders']}
+2018-10-24 11:52:58 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.logstats.LogStats']
+2018-10-24 11:52:58 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2018-10-24 11:52:58 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2018-10-24 11:52:58 [scrapy.middleware] INFO: Enabled item pipelines:
+['urpspider.pipelines.UrpspiderPipeline']
+2018-10-24 11:52:58 [twisted] CRITICAL: Unhandled error in Deferred:
+2018-10-24 11:52:58 [twisted] CRITICAL: 
+Traceback (most recent call last):
+  File "e:\pythonprogram\venv\lib\site-packages\twisted\internet\defer.py", line 1418, in _inlineCallbacks
+    result = g.send(result)
+  File "e:\pythonprogram\venv\lib\site-packages\scrapy\crawler.py", line 81, in crawl
+    start_requests = iter(self.spider.start_requests())
+  File "c:\users\12498\appdata\local\temp\urpspider-1540352854-thj2gy1e.egg\urpspider\spiders\urplogin.py", line 22, in start_requests
+TypeError: string indices must be integers

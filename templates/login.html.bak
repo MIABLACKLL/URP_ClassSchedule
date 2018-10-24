@@ -1,0 +1,17 @@
+
+{% extends 'index.html' %}
+ 
+{% block content %}
+ 
+<div>
+        <form action="/login/" method="POST">
+            <h2>Please sign in </h2>
+            <input type="text" name="username" />
+            <input type="password" name="password" />
+            <button type="submit">Sign in </button>
+            <p style="color: red">{{ login_error }}</p>
+        </form>
+</div>
+ 
+{% endblock %}
+
