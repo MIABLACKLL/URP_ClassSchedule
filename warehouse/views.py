@@ -1,14 +1,8 @@
 from django.shortcuts import render,render_to_response
-from .models import user
-from scrapy.crawler import CrawlerRunner
-from scrapy.utils.project import get_project_settings
-from twisted.internet import reactor,defer
-from scrapy.utils.log import configure_logging
+from .models import urpScrapy, user
 import requests
-import os
-from crochet import setup
-setup()
-
+from scrapy_djangoitem import DjangoItem
+import json
 def login(request):
     formData = {'j_username': '0', 'j_password': '0', 'j_captcha1': 'error'}
     ip="localhost"
@@ -28,16 +22,41 @@ def login(request):
             check_login = session.get(url='http://zhjw.scu.edu.cn/index.jsp', allow_redirects=False)
             code = check_login.status_code
             if code < 300:
-                os.chdir(r'E:\PythonProgram\program\urp_scrapy\crawler\urpspider\urpspider')
-                crawler_settings = get_project_settings()
-                crawler = CrawlerRunner(crawler_settings)
-                configure_logging()
-                crawler.crawl('urplogin', logindata=formData)
+                run_crawl(formData)
                 return render_to_response('success.html', {'username': username})
             else:
                 return render(request, 'login.html')#密码错误
 
-#def index(request):
+def run_crawl(formData):
+    class classScheduleItem(DjangoItem):
+        django_model = urpScrapy
+    class userItem(DjangoItem):
+        django_model = user
+    session = requests.session()
+    response = session.post(url='http://zhjw.scu.edu.cn/j_spring_security_check', data=formData)
+    usermsg = userItem()
+    usermsg['userID'] = formData['j_username']
+    usermsg['userName'] = ""
+    usermsg['userPassword'] = formData['j_password']
+    usermsg.save()
+    classscheduleURL = 'http://zhjw.scu.edu.cn/student/courseSelect/thisSemesterCurriculum/ajaxStudentSchedule/callback'
+    msg = session.get(url=classscheduleURL)
+    rs = json.loads(msg.text)
+    allmsg = rs['xkxx'][0]
+    for key in allmsg:
+        for sameclass in allmsg[key]['timeAndPlaceList']:
+            classSchedule = classScheduleItem()
+            classSchedule['userID'] = user.objects.get(userID=formData['j_username'])
+            classSchedule['attendClassTeacher'] = allmsg[key]['attendClassTeacher']
+            classSchedule['courseName'] = allmsg[key]['courseName']
+            classSchedule['classroomName'] = sameclass['campusName'] + sameclass['teachingBuildingName'] + sameclass[
+                'classroomName']
+            classSchedule['weekDescription'] = sameclass['weekDescription']
+            classSchedule['classDay'] = sameclass['classDay']
+            classSchedule['classSessions'] = sameclass['classSessions']
+            classSchedule['continuingSession'] = sameclass['continuingSession']
+            classSchedule.save()
+
 
 
 
