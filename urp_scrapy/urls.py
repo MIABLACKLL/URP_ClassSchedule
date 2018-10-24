@@ -20,4 +20,5 @@ from warehouse import views
 urlpatterns = [
     path(r'admin/', admin.site.urls),
     path(r'login/', views.login),
+    path(r'success/', views.index),
 ]
