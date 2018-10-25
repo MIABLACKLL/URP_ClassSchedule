@@ -3,8 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import urpScrapy, user
 import requests
 from scrapy_djangoitem import DjangoItem
-from django.forms.models import model_to_dict
 import json
+import time
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 
@@ -77,9 +77,9 @@ def index(request):
         msgstr = str(msgdict)
         msgstr = msgstr.replace("'", "\"")
         json_data = json.loads(msgstr)
-        with open("msg.json", "w") as f:
+        with open("templates/msg.html", "w") as f:
             json.dump(json_data, f, ensure_ascii=False)
-        return render("success.html",json_data)
+        return render(request,"msg.html")
 
 
 
